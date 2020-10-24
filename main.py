@@ -7,14 +7,14 @@ def get_text_json(json_file):
   with open(json_file, 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-  news_list =[title['description'] for title in data["rss"]["channel"]["items"]]
+  news_list =[title['description'] for title in data['rss']['channel']['items']]
   return news_list
 
 def get_text_xml(xml_file):
-  parser = ET.XMLParser(encoding="utf-8")
+  parser = ET.XMLParser(encoding='utf-8')
   tree = ET.parse(xml_file, parser)
   root = tree.getroot()
-  news_list = [item.find("description").text for item in root.findall("channel/item")]
+  news_list = [item.find('description').text for item in root.findall('channel/item')]
   return news_list
 
 
@@ -29,7 +29,7 @@ def get_top_words(news_list):
   result = [news_words.most_common()[i] for i in range(0, 10)]
   return result
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   print(get_top_words(get_text_json('files/newsafr.json')), sep='\n')
   print()
-  print(get_top_words(get_text_xml("files/newsafr.xml")), sep='\n')
+  print(get_top_words(get_text_xml('files/newsafr.xml')), sep='\n')
