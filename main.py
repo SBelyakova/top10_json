@@ -18,7 +18,7 @@ def get_text_xml(xml_file):
   return news_list
 
 
-def get_top_words(news_list, min_word_length):
+def get_top_words(news_list, min_word_length, top_words):
   news_list = list(map(lambda x: x.split(' '), news_list))
   news_words = []
 
@@ -27,9 +27,9 @@ def get_top_words(news_list, min_word_length):
     news_words.extend(more_than_six)
 
   news_words = Counter(news_words)
-  return news_words.most_common()[:10]
+  return news_words.most_common()[:top_words]
 
 if __name__ == '__main__':
-  print(get_top_words(get_text_json('files/newsafr.json'), 6), sep='\n')
+  print(get_top_words(get_text_json('files/newsafr.json'), 6, 10), sep='\n')
   print()
-  print(get_top_words(get_text_xml('files/newsafr.xml'), 6), sep='\n')
+  print(get_top_words(get_text_xml('files/newsafr.xml'), 6, 10), sep='\n')
